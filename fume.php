@@ -19,18 +19,14 @@ require 'session.php';
   $resultat = 0;
   if (!empty($_POST)) {
     $TC = $_POST['TA'];
-    echo $TC;
-    echo "<br>";
+
     $TA = $_POST['TA'];
-    echo $TA;
-    echo "<br>";
+
     $A1 = $_POST['A1'];
-    echo $A1;
-    echo "<br>";
+
     $B = $_POST['B'];
-    echo $B;
-    echo "<br>";
-    $resultat = ($TC - $TA) * ($A1 / 6) + $B;
+
+    $resultat = $A1 * ($TC * $TA) / $B;
   }
   ?>
 
@@ -44,7 +40,7 @@ require 'session.php';
       <h4>Une certaine quantité de chaleur est perdue dans les fumées. Les pertes dans les fumées peuvent être calculées par la formule suivante :</h4>
     </div>
     <br>
-    <h5 class="d-flex justify-content-center">P<sub>f</sub>k*(T<sub>f</sub>*T<sub>a</sub>)/CO<sub>2</sub>%</h5>
+    <h5 class="d-flex justify-content-center">P<sub>f</sub>k*(T<sub>f</sub>*T<sub>a</sub>)/CO<sub>2</sub>% = <?= $resultat ?></h5>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
       <div class="form-group">
         <label>T<sub>carburant</sub></label>
@@ -55,11 +51,11 @@ require 'session.php';
         <input type="text" name="TA" placeholder="Enter T Carburant" class="form-control" value="">
       </div>
       <div class="form-group">
-        <label>A1</label>
+        <label>PFK</label>
         <input type="text" name="A1" placeholder="Enter A1" class="form-control" value="">
       </div>
       <div class="form-group">
-        <label>B</label>
+        <label>CO2</label>
         <input type="text" name="B" placeholder="Enter B" class="form-control" value="">
       </div>
       <div class="form-group">
